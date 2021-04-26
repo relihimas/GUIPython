@@ -16,6 +16,7 @@ class Window(QWidget):
         layout = QGridLayout()
         self.setLayout(layout)
 
+        """Nome dos campos que indicaram para o usuário o que deve ser preenchido: """
         nome = QLabel("Nome: ")
         layout.addWidget(nome, 0, 0)
 
@@ -31,6 +32,7 @@ class Window(QWidget):
         data = QLabel("Data Cadastro: ")
         layout.addWidget(data, 4, 0)
 
+        """Campos para inserção dos dados"""
         self.linenome = QLineEdit()
         # self.linenome.returnPressed.connect(self.return_pressed)
         layout.addWidget(self.linenome, 0, 1)
@@ -51,6 +53,7 @@ class Window(QWidget):
         # self.linedata.returnPressed.connect(self.return_pressed)
         layout.addWidget(self.linedata, 4, 1)
 
+        """Botão para envio dos dados para o banco"""
         button = QPushButton("Clique para enviar")
         button.clicked.connect(self.on_button_clicked)
         layout.addWidget(button, 10, 1)
@@ -67,7 +70,11 @@ class Window(QWidget):
         envio = Acesso()
         envio.envioclientetipo(self.nome, self.endereco, self.cidade, self.companhia, self.data)
         print("Envio com sucesso!!")
-
+        self.linenome.clear()
+        self.lineend.clear()
+        self.linecidade.clear()
+        self.linecomp.clear()
+        self.linedata.clear()
 
 app = QApplication(sys.argv)
 screen = Window()
