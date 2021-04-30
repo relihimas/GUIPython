@@ -8,7 +8,7 @@ class Acesso:
         self.username = ''
         self.password = ''
         self.arq = pd.read_excel(
-            "C:\\Users\\Rachid Elihimas\\OneDrive - MGN - Gestão de Negócios\\Área de Trabalho\\Outros\\testeSSIS.xlsx")
+            "PASS HERE YOUR SOURCE")
         self.cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER='+self.server+';DATABASE='+self.database+';UID='+self.username+';PWD='+self.password)
         self.cursor = self.cnxn.cursor()
 
