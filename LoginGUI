@@ -5,7 +5,7 @@ import sys
 class Loginpage(QWidget):
   def __init__(self):
     QWidget.__init__(self)
-    self.setWindowIcon(QtGui.QIcon('#####'))
+    self.setWindowIcon(QtGui.QIcon(####))
     self.setWindowTitle('MGN - Login')
     self.resize(250, 100)
 
@@ -32,6 +32,20 @@ class Loginpage(QWidget):
   def press_login(self):
     self.lineusuario.clear()
     self.linesenha.clear()
+    msg = QMessageBox()
+    msg.setIcon(QMessageBox.Information)
+    msg.resize(200, 100)
+    msg.setWindowTitle("MGN - Login")
+    msg.setText("Usuário ou senha incorretos!")
+    msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+    retval = msg.exec_()
+
+
+
+
+
+
+    # criar um procedimento de checagem se o nome do usuário e senha existem
 
 app = QApplication(sys.argv)
 login = Loginpage()
