@@ -1,0 +1,32 @@
+import sys
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+class MainWindow(QMainWindow):
+    def __init__(self, parent=None):
+        super(MainWindow, self).__init__(parent)
+        self.mdi = QMdiArea()
+        self.setCentralWidget(self.mdi)
+        bar = self.menuBar()
+
+        file = bar.addMenu("File")
+        consulta = bar.addMenu("Consulta")
+        cadastro = bar.addMenu("Cadastro")
+        cadastro.addAction("Cadastrar Usuário")
+        cadastro.triggered[QAction].connect(self.cadastro)
+        self.setWindowTitle("MGN Página de Teste")
+
+    def cadastro(self):
+        print('oi')
+
+
+def main():
+    app = QApplication(sys.argv)
+    ex = MainWindow()
+    ex.show()
+    sys.exit(app.exec_())
+
+
+if __name__ == '__main__':
+    main()
