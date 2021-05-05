@@ -4,6 +4,8 @@ import sys
 from envioSQL import Acesso
 from PyQt5 import QtGui
 
+retorno = 1
+
 class Cadastro(QWidget):
     def __init__(self, parent=None):
         super().__init__()
@@ -57,24 +59,39 @@ class Cadastro(QWidget):
         button.clicked.connect(self.on_button_clicked)
         layout.addWidget(button, 10, 1)
 
-        self.parent = parent
+        # self.parent = parent
 
     def on_button_clicked(self):
-        # print("The button was pressed!")
         # Nome, Endereço, Cidade, Companhia, DTCadastro
         self.nome = self.linenome.text()
         self.endereco = self.lineend.text()
         self.cidade = self.linecidade.text()
         self.companhia = self.linecomp.text()
         self.data = self.linedata.text()
-        envio = Acesso()
-        envio.envioclientetipo(self.nome, self.endereco, self.cidade, self.companhia, self.data)
-        print("Envio com sucesso!!")
+        # envio = Acesso()
+        # envio.envioclientetipo(self.nome, self.endereco, self.cidade, self.companhia, self.data)
         self.linenome.clear()
         self.lineend.clear()
         self.linecidade.clear()
         self.linecomp.clear()
         self.linedata.clear()
+        if retorno == 1:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.resize(200, 100)
+            msg.setWindowTitle("Retorno Cadastro")
+            msg.setText("Cadastro Realizado!")
+            msg.setStandardButtons(QMessageBox.Ok)
+            retval = msg.exec_()
+        else:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.resize(200, 100)
+            msg.setWindowTitle("Retorno Cadastro")
+            msg.setText("Usuário ou senha incorretos!")
+            msg.setStandardButtons(QMessageBox.Ok)
+            retval = msg.exec_()
+
 
 # app = QApplication(sys.argv)
 # screen = Cadastro()
