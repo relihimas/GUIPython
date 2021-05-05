@@ -1,17 +1,16 @@
 from PyQt5.QtCore import *
-from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import sys
 from envioSQL import Acesso
+from PyQt5 import QtGui
 
-
-class Window(QWidget):
-    def __init__(self):
-        QWidget.__init__(self)
-        self.setWindowTitle("Envio de Dados para o SQL")           #título
-        # self.setWindowIcon()                            ícone
-        # self.setFixedHeight(500)                        altura
-        # self.setFixedWidth(400)                         largura
+class Cadastro(QWidget):
+    def __init__(self, parent=None):
+        super().__init__()
+        self.setWindowTitle("Envio de Dados para o SQL")
+        self.resize(450, 300)
+        self.setWindowIcon(
+            QtGui.QIcon(r'C:\Users\Rachid Elihimas\OneDrive - MGN - Gestão de Negócios\Área de Trabalho\mgnlogo.webp'))
 
         layout = QGridLayout()
         self.setLayout(layout)
@@ -58,9 +57,10 @@ class Window(QWidget):
         button.clicked.connect(self.on_button_clicked)
         layout.addWidget(button, 10, 1)
 
+        self.parent = parent
 
     def on_button_clicked(self):
-        print("The button was pressed!")
+        # print("The button was pressed!")
         # Nome, Endereço, Cidade, Companhia, DTCadastro
         self.nome = self.linenome.text()
         self.endereco = self.lineend.text()
@@ -76,7 +76,7 @@ class Window(QWidget):
         self.linecomp.clear()
         self.linedata.clear()
 
-app = QApplication(sys.argv)
-screen = Window()
-screen.show()
-sys.exit(app.exec_())
+# app = QApplication(sys.argv)
+# screen = Cadastro()
+# screen.show()
+# sys.exit(app.exec_())
