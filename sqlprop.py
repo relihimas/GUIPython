@@ -3,8 +3,8 @@ import pandas as pd
 
 class Acesso:
     def __init__(self):
-        self.server = '#####'
-        self.database = '#####'
+        self.server = 'DESKTOP-5F7OCN9'
+        self.database = 'Teste'
         self.username = ''
         self.password = ''
         self.cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER='+self.server+';DATABASE='+self.database+';UID='+self.username+';PWD='+self.password)
@@ -25,7 +25,7 @@ class Acesso:
 
     def checklogin(self, usuario, senha):
         prcdcheckemail = 'EXEC prcd_checagemEmail @varUsuario = ?, @varSenha = ?'
-        paramsemail = ("rachid", "12345")
+        paramsemail = (usuario, senha)
         self.cursor.execute(prcdcheckemail, paramsemail)
         rc = self.cursor.fetchval()
         self.cnxn.commit()
