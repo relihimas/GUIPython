@@ -3,7 +3,7 @@ import pandas as pd
 
 class Acesso:
     def __init__(self):
-        self.server = 'DESKTOP-5F7OCN9'
+        self.server = '####'
         self.database = 'Teste'
         self.username = ''
         self.password = ''
