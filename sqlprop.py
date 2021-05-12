@@ -4,7 +4,7 @@ import pandas as pd
 class Acesso:
     def __init__(self):
         self.server = '#####'
-        self.database = 'Teste'
+        self.database = '#####'
         self.username = ''
         self.password = ''
         self.cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER='+self.server+';DATABASE='+self.database+';UID='+self.username+';PWD='+self.password)
@@ -19,17 +19,21 @@ class Acesso:
     def procedure_cadastrousuario(self, nome, endereco, cidade, companhia, data):
         prcdcadastrousuario = 'EXEC prcd_cadastrousuario @varNome = ?, @varEndereco = ?, @varCidade = ?, @varCompanhia = ?, @varData = ?;'
         params = (nome, endereco, cidade, companhia, data)
-        self.cursor.execute(prcdcadastrousuario,params)
+        self.cursor.execute(prcdcadastrousuario, params)
         self.cnxn.commit()
         self.cursor.close()
 
-    # def checklogin(self, usuario, senha):
-    #     return True
-
-
+    def checklogin(self, usuario, senha):
+        prcdcheckemail = 'EXEC prcd_checagemEmail @varUsuario = ?, @varSenha = ?'
+        paramsemail = ("rachid", "12345")
+        self.cursor.execute(prcdcheckemail, paramsemail)
+        rc = self.cursor.fetchval()
+        self.cnxn.commit()
+        self.cursor.close()
+        return rc
 
 # envio = Acesso()
-# envio.envioclientetipo()
+# envio.checklogin("rachid", "12345")
 
 
 # def envioclientetipo(self, nome, endereco, cidade, companhia, data):
