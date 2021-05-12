@@ -2,11 +2,12 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtGui
 import sys
 from MainWindow import MainWindow
+from sqlprop import Acesso
 
 class Loginpage(QWidget):
     def __init__(self):
       super().__init__()
-      self.setWindowIcon(QtGui.QIcon(r'C:\Users\Rachid Elihimas\OneDrive - MGN - Gestão de Negócios\Área de Trabalho\mgnlogo.webp'))
+      self.setWindowIcon(QtGui.QIcon(r'####'))
       self.setWindowTitle('MGN - Login')
       self.resize(250, 100)
       self.MainWindow = MainWindow()
@@ -34,10 +35,12 @@ class Loginpage(QWidget):
     def press_login(self):
       self.loginuser = self.lineusuario.text()
       self.loginpswrd = self.linesenha.text()
+      chlogin = Acesso()
       self.lineusuario.clear()
       self.linesenha.clear()
-      if self.loginuser == 'rachid' and self.loginpswrd == 'rachid':
-        self.MainWindow.show()
+      if chlogin.checklogin(self.loginuser, self.loginpswrd) == 5:
+          self.MainWindow.show()
+          login.hide()
       else:
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
@@ -46,7 +49,6 @@ class Loginpage(QWidget):
         msg.setText("Usuário ou senha incorretos!")
         msg.setStandardButtons(QMessageBox.Ok)
         retval = msg.exec_()
-
 
 
 app = QApplication(sys.argv)
