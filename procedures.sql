@@ -27,3 +27,12 @@ BEGIN
 END;
 
 ##########################################################################################################################################################
+
+CREATE PROCEDURE prcd_insertUser
+	@varUser nvarchar(20),
+	@varPsswrd nvarchar(20),
+	@varKey nvarchar(200)
+AS
+BEGIN
+	INSERT INTO [Teste].[dbo].[userLogin] VALUES (@varUser, @varPsswrd, @varKey)
+END;
