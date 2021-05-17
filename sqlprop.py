@@ -1,9 +1,11 @@
 import pyodbc
 import pandas as pd
+from cryptography.fernet import Fernet
+
 
 class Acesso:
     def __init__(self):
-        self.server = '####'
+        self.server = 'DESKTOP-5F7OCN9'
         self.database = 'Teste'
         self.username = ''
         self.password = ''
@@ -32,14 +34,15 @@ class Acesso:
         self.cursor.close()
         return rc
 
-# envio = Acesso()
-# envio.checklogin("rachid", "12345")
-
-
-# def envioclientetipo(self, nome, endereco, cidade, companhia, data):
-#     for index, row in self.arq.iterrows():
-#         self.cursor.execute(
-#             "INSERT INTO clienteTipo (Nome, Endereço, Cidade, Companhia, DTCadastro) values(?, ?, ? ,? ,?)",
-#             row.Nome, row.Endereço, row.Cidade, row.Companhia, row.Data)
-#     self.cnxn.commit()
-#     self.cursor.close()
+    def cadastroUserLogin(self, usuario, senha, permissao):
+        chave = Fernet.generate_key()
+        usuario_encoded = usuario.encode("UTF-8")
+        senha_encoded = senha.encode("UTF-8")
+        cipher_suite = Fernet(chave)
+        ciphered_user_text = cipher_suite.encrypt(usuario_encoded)
+        ciphered_senha_text = cipher_suite.encrypt(senha_encoded)
+        prcdcadastrologin = 'EXEC prcd_insertUser @varUser = ?, @varPsswrd = ?, @varPermissao = ?, @varKey = ?'
+        paramslogin = (ciphered_user_text, ciphered_senha_text, permissao, chave)
+        self.cursor.execute(prcdcadastrologin, paramslogin)
+        self.cnxn.commit()
+        self.cursor.close()
