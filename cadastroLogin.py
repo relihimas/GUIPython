@@ -24,7 +24,7 @@ class Cadastrologin(QWidget):
         psswrd = QLabel("Senha: ")
         layout.addWidget(psswrd, 1, 0)
 
-        prmss = QLabel("Permissao: ")
+        prmss = QLabel("Permissão: ")
         layout.addWidget(prmss, 2, 0)
 
         """Campos para inserção dos dados"""
@@ -32,6 +32,7 @@ class Cadastrologin(QWidget):
         layout.addWidget(self.lineuser, 0, 1)
 
         self.linepsswrd = QLineEdit()
+        self.linepsswrd.setEchoMode(QLineEdit.Password)
         layout.addWidget(self.linepsswrd, 1, 1)
 
         self.lineprmss = QComboBox()
@@ -49,14 +50,15 @@ class Cadastrologin(QWidget):
     def combobox_changed(self):
         text = self.lineprmss.currentText()
 
+
     def on_button_clicked(self):
             self.usuario = self.lineuser.text()
             self.senha = self.linepsswrd.text()
-            self.permissao = self.lineprmss.text()
+            self.permissao = self.lineprmss.currentText()
 
-            if self.lineprmss.text() == "Adminitrador":
+            if self.lineprmss.currentText() == "Administrador":
                 self.permissao = 5
-            elif self.lineprmss.text() == "Usuário":
+            elif self.lineprmss.currentText() == "Usuário":
                 self.permissao = 3
             else:
                 self.permissao = 1
